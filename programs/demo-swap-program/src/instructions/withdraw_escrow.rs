@@ -17,7 +17,6 @@ pub fn withdraw_escrow(
     let inner = vec![
         ROUTER_PDA_SEED.as_ref(),
         router.token_mint.as_ref(),
-        router.id.as_ref(), 
         bump_vector.as_ref()
     ];
     let outer = vec![inner.as_slice()];
@@ -47,13 +46,13 @@ pub struct WithdrawEscrow<'info> {
     #[account(
        mut, 
        has_one = initializer,
-       seeds = [ROUTER_PDA_SEED, router.token_mint.as_ref(), router.id.as_ref()], bump = router.bump
+       seeds = [ROUTER_PDA_SEED, router.token_mint.as_ref()], bump = router.bump
     )]
     pub router: Account<'info, Router>,  
     
     #[account(
         mut,
-        seeds = [ESCROW_PDA_SEED, router.token_mint.as_ref(), router.id.as_ref()], bump = router.escrow_bump
+        seeds = [ESCROW_PDA_SEED, router.token_mint.as_ref()], bump = router.escrow_bump
     )]
     pub escrow: Account<'info, TokenAccount>,
 

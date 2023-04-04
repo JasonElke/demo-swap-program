@@ -41,7 +41,6 @@ pub fn swap(
     let inner = vec![
         ROUTER_PDA_SEED.as_ref(),
         router.token_mint.as_ref(),
-        router.id.as_ref(), 
         bump_vector.as_ref()
     ];
     let outer = vec![inner.as_slice()];
@@ -69,7 +68,7 @@ pub struct Swap<'info> {
 
     #[account(
         mut,
-        seeds = [ROUTER_PDA_SEED, token_mint.key().as_ref(), router.id.as_ref()], bump = router.bump
+        seeds = [ROUTER_PDA_SEED, token_mint.key().as_ref()], bump = router.bump
     )]
     pub router: Account<'info, Router>,
     pub token_mint: Account<'info, Mint>,
@@ -77,7 +76,7 @@ pub struct Swap<'info> {
 
     #[account(
         mut,
-        seeds = [ESCROW_PDA_SEED, token_mint.key().as_ref(), router.id.as_ref()], bump = router.escrow_bump
+        seeds = [ESCROW_PDA_SEED, token_mint.key().as_ref()], bump = router.escrow_bump
     )]
     pub escrow: Account<'info, TokenAccount>,
 

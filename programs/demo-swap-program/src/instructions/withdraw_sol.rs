@@ -25,7 +25,7 @@ pub struct WithdrawSol<'info> {
 
     #[account(
        mut, 
-       seeds = [ROUTER_PDA_SEED, router.token_mint.as_ref(), router.id.as_ref()], bump = router.bump,
+       seeds = [ROUTER_PDA_SEED, router.token_mint.as_ref()], bump = router.bump,
        has_one = initializer
     )]
     pub router: Account<'info, Router>,    

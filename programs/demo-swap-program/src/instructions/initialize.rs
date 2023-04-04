@@ -9,21 +9,15 @@ use std::str;
 /// Initialize functions will init a router to control the swap process, and also create an escrow to hold token under the router's authority
 pub fn initialize(
     ctx: Context<Initialize>,
-    id: String,
-    token_price: Vec<u64>,
     token_decimal: u8
 )-> Result<()> {
-    require!(token_price.len() == 2, ControllerError::InvalidPrice);
-    require!(id.chars().count()< MAX_STRING_LEN, ControllerError::InvalidID);
-
     let router = &mut ctx.accounts.router;
     let initializer = &ctx.accounts.initializer;
     let token_mint = &ctx.accounts.token_mint;
 
     router.initializer = initializer.key();
-    router.id = id.clone();
     router.token_mint = token_mint.key();
-    router.token_price = token_price;
+    router.token_price = 10;
     router.token_decimal = token_decimal;
     router.sol_received = 0;
     router.sol_claimed = 0;
@@ -35,7 +29,6 @@ pub fn initialize(
 }
 
 #[derive(Accounts)]
-#[instruction(id: String)]
 pub struct Initialize<'info> {
     #[account(mut)]
     pub initializer: Signer<'info>,
@@ -45,7 +38,7 @@ pub struct Initialize<'info> {
         init,
         payer=initializer, 
         space = Router::LEN,
-        seeds = [ROUTER_PDA_SEED.as_ref(), token_mint.key().as_ref(), id.as_ref()],
+        seeds = [ROUTER_PDA_SEED.as_ref(), token_mint.key().as_ref()],
         bump
     )]
     pub router: Account<'info, Router>,
@@ -53,7 +46,7 @@ pub struct Initialize<'info> {
     #[account(
         init, 
         payer=initializer,
-        seeds=[ESCROW_PDA_SEED.as_ref(), token_mint.key().as_ref(), id.as_ref()],
+        seeds=[ESCROW_PDA_SEED.as_ref(), token_mint.key().as_ref()],
         bump,
         token::mint=token_mint,
         token::authority=router,

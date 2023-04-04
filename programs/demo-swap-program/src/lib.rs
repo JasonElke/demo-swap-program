@@ -16,11 +16,9 @@ pub mod demo_swap_program {
 
     pub fn initialize(
         ctx: Context<Initialize>, 
-        id: String,
-        token_price: Vec<u64>,
         token_decimal: u8
     ) -> Result<()> {
-        instructions::initialize::initialize(ctx, id, token_price, token_decimal)
+        instructions::initialize::initialize(ctx, token_decimal)
     }
 
     pub fn swap(ctx: Context<Swap>, swap_amount: u64) -> Result<()> {
