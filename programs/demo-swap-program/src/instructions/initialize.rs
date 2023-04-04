@@ -2,8 +2,7 @@ use anchor_lang::prelude::*;
 use crate::{state::Router};
 use anchor_spl::token::{ Mint, TokenAccount};
 
-use crate::{ROUTER_PDA_SEED,ESCROW_PDA_SEED, MAX_STRING_LEN};
-use crate::errors::ControllerError;
+use crate::{ROUTER_PDA_SEED,ESCROW_PDA_SEED};
 use std::str;
 
 /// Initialize functions will init a router to control the swap process, and also create an escrow to hold token under the router's authority

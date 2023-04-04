@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 const SOL_TO_LAMPORTS: u128 = 1000000000;
-use crate::{MAX_STRING_LEN};
 
 #[account]
 pub struct Router{

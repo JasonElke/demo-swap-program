@@ -8,7 +8,7 @@ use crate::state::Router;
 use anchor_spl::token::{TokenAccount, Mint};
 use crate::errors::SwapError;
 
-// SIMPLE function to swap SOL using the contract
+// Simple function to swap SOL using programs
 pub const ONE_SOL: u64 = 1000000000;
 
 pub fn swap(
