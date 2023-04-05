@@ -49,10 +49,10 @@ export const SolanaSwapView: FC = ({ }) => {
             <div className="text-center hero-content">
               <div className="max-w-lg">
                 <h1 className="mb-5 text-5xl">
-                  Swap SOL for MOVE <SolanaLogo />
+                  Swap SOL for SPACE <SolanaLogo />
                 </h1>
 
-                <p>1 SOL = 10 MOVE</p>
+                <p>1 SOL = 10 SPACE</p>
               </div>
             </div>
           </div>
