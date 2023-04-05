@@ -16,7 +16,7 @@ export class Account {
           console.log("Have no deployer when testing program!");
           process.exit(1);
         }
-        this.deployer= deployer;
+        this.deployer = deployer;
       }
       
       //devnet or mainnet

@@ -1,5 +1,6 @@
 import {Account} from "./account";
 import * as anchor from "@project-serum/anchor";
+import * as spl from '@solana/spl-token';
 
 
 const ROUTER_PDA_SEED = "router";
@@ -20,7 +21,7 @@ export class SwapAccount extends Account {
         deployer?: anchor.web3.Keypair
     ){
         super(provider, deployer);
-        this.program = anchor.workspace.SolanaSwapDapp;
+        this.program = anchor.workspace.DemoSwapProgram;
         this.tokenMint = tokenMint
     }
 
@@ -62,12 +63,12 @@ export class SwapAccount extends Account {
     ) => {
         let routerPDA = await this.getRouterPDA();
         let escrowPDA = await this.getEscrowPDA();
-
+        console.log("routerPDA: ", this.program);
         return await this.program.methods.initialize(token_decimal).accounts({
             initializer: initializer.publicKey,
             tokenMint: this.tokenMint,
             router: routerPDA.key,
-            escrow: escrowPDA.key
+            escrow: escrowPDA.key,
         }).signers([initializer]).rpc();
     }
 

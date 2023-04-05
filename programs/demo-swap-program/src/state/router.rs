@@ -13,12 +13,14 @@ pub struct Router{
     pub escrow_bump: u8
 }
 
+const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBLIC_KEY_LENGTH: usize = 32;
 const U8_SIZE_LENGTH: usize = 1;
 const U64_SIZE_LENGTH: usize = 8;
 
 impl Router{ 
-    pub const LEN: usize = PUBLIC_KEY_LENGTH
+    pub const LEN: usize = DISCRIMINATOR_LENGTH
+        + PUBLIC_KEY_LENGTH
         + U8_SIZE_LENGTH 
         + PUBLIC_KEY_LENGTH 
         + U8_SIZE_LENGTH
