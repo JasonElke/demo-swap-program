@@ -1,7 +1,7 @@
 # SOLANA PROGRAM
 A Program that allow from SOL to SPACE tokens.
 ## Demo website
-    *   
+    *   https://demo-swap-program.vercel.app/
     *   Mint token address: 2stmR4nWKAKfhsvmZpkJd2vqc7CuLTp5A9roneaHjnSG
 
 2. Program structure 
@@ -20,17 +20,17 @@ Typically, the program's current state is saved in the `programs/demo-swap-progr
 
 5. The `initializer` can withdraw SOL and SPACE tokens via the `withdraw_sol` and `withdraw_escrow` functions, respectively (`instructions/withdraw_sol.rs` and `withdraw_escrow.rs`).
 
-### Deployment
+## Deployment
 This should be done like any Anchor project, so I will not elaborate
 
 
-### Token
+## Token
 To create new tokens, run `ts-node scripts/create_token.ts` 
 
  **_NOTE:_**  The `SPACE` token metadata and uri for this project is temporaraly stored in the folder `demo-swap-program/metadata`
 
 
-### Interact with the program 
+## Interact with the program 
 Run the following  `ts-node scripts/tx/*.ts` to interact with each functions of the program.
 
  **_NOTE:_**: In order to interact with all the scripts, we need to `initialize` the program first (creating `router` and escrow accounts) by using file `initialize.ts`. And each time you initialize, you need to provide `token_mint`, which is located inside the `data.ts`. These data will be used to calculate the PDA needed to interact with the program properly.
