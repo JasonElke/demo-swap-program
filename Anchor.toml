@@ -1,13 +1,13 @@
 [features]
 seeds = false
-[programs.devnet]
-demo_swap_program = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+[programs.localnet]
+demo_swap_program = "AGCxcT9XB4G8fWgrFypvJTn7XENcKigshSDFp7veNkpx"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "/Users/thuongthai/.config/solana/id.json"
 
 [scripts]
