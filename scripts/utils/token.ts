@@ -63,7 +63,7 @@ export const createAtaAccount = async(provider: anchor.AnchorProvider, fee_payer
 
     const txCreateAtaAccountSig = await provider.sendAndConfirm(txCreateAtaAccount, [fee_payer]);
     
-    console.log("txCreateAtaAccount: ", txCreateAtaAccount)
+    console.log("txCreateAtaAccount: ", txCreateAtaAccountSig)
 
     return userAssociatedTokenAccount
 }
