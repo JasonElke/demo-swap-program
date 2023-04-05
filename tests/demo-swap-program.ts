@@ -72,7 +72,7 @@ describe("demo-swap-program", () => {
   it("Swap", async() => { 
     const routerPDA = await swapAccount.getRouterPDA();
     let routerInfo = await swapAccount.provider.connection.getAccountInfo(routerPDA.key);
-    let beforeSwapControllerBalance = routerInfo.lamports;
+    let beforeSwapRouterBalance = routerInfo.lamports;
     
     let bobInfo = await swapAccount.provider.connection.getAccountInfo(bob.publicKey);
     let beforeSwapBobBalance = bobInfo.lamports;
@@ -84,7 +84,7 @@ describe("demo-swap-program", () => {
     await swapAccount.swap(bob, bob_token_wallet, swapAmount);
 
     routerInfo = await swapAccount.provider.connection.getAccountInfo(routerPDA.key);
-    let afterSwapControllerBalance = routerInfo.lamports;
+    let afterSwapRouterBalance = routerInfo.lamports;
 
     bobInfo = await swapAccount.provider.connection.getAccountInfo(bob.publicKey);
     let afterSwapBobBalance = bobInfo.lamports;
@@ -95,7 +95,7 @@ describe("demo-swap-program", () => {
      * Bob token wallet balance should increase by: 10 SPACE (10 * 10^SPACE_DECIMAL) 
      */
     assert.ok(beforeSwapBobBalance - afterSwapBobBalance >= swapAmount.toNumber(), "Bob balance should be deducted by an amount greater than 1 SOL"); // bob pay some lamports for gas fee 
-    assert.ok(afterSwapControllerBalance - beforeSwapControllerBalance == swapAmount.toNumber(), "Router Balance should increase by an swap amount");
+    assert.ok(afterSwapRouterBalance - beforeSwapRouterBalance == swapAmount.toNumber(), "Router Balance should increase by an swap amount");
 
     let bobSpaceBalance = await getSplBalance(swapAccount.provider, bob_token_wallet);
     expectedReceiveAmount = swapAmount.mul(SPACE_PRICE).mul(new anchor.BN(10).pow(new anchor.BN(SPACE_DECIMAL))).div(SOL_TO_LAMPORT)
@@ -116,7 +116,7 @@ describe("demo-swap-program", () => {
   it("Deployer can withdraw SOL", async() => {
     const routerPDA = await swapAccount.getRouterPDA();
     let routerInfo = await swapAccount.provider.connection.getAccountInfo(routerPDA.key);
-    let beforeSwapControllerBalance = routerInfo.lamports;
+    let beforeSwapRouterBalance = routerInfo.lamports;
     
     let deployerInfo = await swapAccount.provider.connection.getAccountInfo(deployer.publicKey);
     let beforeSwapDeployerBalance = deployerInfo.lamports;
@@ -125,12 +125,12 @@ describe("demo-swap-program", () => {
     await swapAccount.withdrawSol(deployer);
 
     routerInfo = await swapAccount.provider.connection.getAccountInfo(routerPDA.key);
-    let afterSwapControllerBalance = routerInfo.lamports;
+    let afterSwapRouterBalance = routerInfo.lamports;
     
     deployerInfo = await swapAccount.provider.connection.getAccountInfo(deployer.publicKey);
     let afterSwapDeployerBalance = deployerInfo.lamports;
   
-    assert.ok(beforeSwapControllerBalance - afterSwapControllerBalance == swapAmount.toNumber(), "The SOL balance in the router should get deducted");
+    assert.ok(beforeSwapRouterBalance - afterSwapRouterBalance == swapAmount.toNumber(), "The SOL balance in the router should get deducted");
     assert.ok(afterSwapDeployerBalance - beforeSwapDeployerBalance >= (swapAmount.toNumber() - 100000), "The SOL balance in the deployer should get increase"); // minus some tx fee
   })
 
