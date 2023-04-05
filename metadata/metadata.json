@@ -1,0 +1,10 @@
+{
+  "name": "Space Station",
+  "symbol": "SPACE",
+  "description": "A simple token for swap",
+  "seller_fee_basis_points": 0,
+  "external_url": "",
+  "edition": "Class of 2021",
+  "background_color": "000000",
+  "image": "https://raw.githubusercontent.com/JasonElke/demo-swap-solana/develop/metadata/space.jpeg"
+}
